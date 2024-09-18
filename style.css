@@ -79,7 +79,7 @@ p{
     z-index: 1000;
     left: 0;
     width: 100vw;
-    margin: auto;
+    height: auto;
 }
 #header .header{
     min-height: 8vh;
@@ -109,4 +109,132 @@ align-items: center;
 z-index: 100;
 cursor: pointer;
 transform: scale(0.8);
+}
+#header .humburger::after{
+    content: '';
+    border: 3px solid white;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    animation: humburger-plus 1s ease infinite;
+}
+@keyframes humburger-plus{
+    0%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: scale(1.4);
+    }
+    
+}
+
+#header .humburger .bar{
+    background-color: white;
+    height: 2px;
+    width: 30px;
+    position: relative;
+    z-index: -1;
+}
+
+#header .humburger .bar::before,
+#header .humburger .bar::after{
+    content: "";
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    transition: 0.3s ease top, bottom;
+}
+
+#header .humburger .bar::after{
+    top: 8px;
+}
+#header .humburger .bar::before{
+    bottom: 8px;
+}
+#header .humburger.active .bar::before{
+    bottom: 0px;
+}
+#header .humburger.active .bar::after{
+    top: 0px;
+}
+
+
+#header .nav-list ul{
+    list-style-type: none;
+    background-color: rgba(31, 30, 30);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: 0.3s ease left;
+}
+#header .nav-list ul.active{
+    left: 0;
+}
+#header .nav-list ul a{
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    display: block;
+    padding: 20px;
+}
+
+
+#header .nav-list ul a::after{
+    content: attr(data-after);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: rgba(240, 248, 255, 0.023);
+    font-size: 13rem;
+    letter-spacing: 50px;
+    z-index: -1;
+    transition: 0.3s ease letter-spacing;
+}
+#header .nav-list ul li:hover a::after{
+    transform: translate(-50%, -50%) scale(1);
+    letter-spacing: initial;
+}
+
+#header .nav-list ul li:hover a{
+    color: crimson;
+}
+
+
+@media screen and (min-width:1200px) {
+    #header .humburger{
+        display: none;
+    }
+    #header .nav-list ul{
+        position: initial;
+        display: block;
+        height: auto;
+        width: fit-content;
+        background-color: transparent;
+    }
+    #header .nav-list ul li{
+        display: inline-block;
+    }
+    #header .nav-list ul a{
+        font-size: 1.8rem;
+    }
+    #header .nav-list ul a::after{
+    display: none;
+    }
+
 }
